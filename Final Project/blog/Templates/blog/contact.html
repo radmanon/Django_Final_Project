@@ -1,0 +1,156 @@
+
+
+  {% load static %}
+  
+  
+  
+  {% load my_replace %} 
+  
+
+{% block content %}
+
+
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <title>Contact Us</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="{% static 'contact/css/style.css' %}">
+  
+    </head>
+    <body class="img js-fullheight" style="background-image: url({% static 'contact/images/IMG5.jpg' %});">
+
+      <br>
+      <center><h2 class="heading-section">Contact To SanginSpar</h2></center>
+<br><br>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="dbox w-100 text-center">
+            <div class="icon d-flex align-items-center justify-content-center">
+              <span class="fa fa-map-marker"></span>
+            </div>
+            <div class="text">
+              <p><span>Address:</span> Office: NO4681, Yas5 Alley, Delgosha ST, Shahid Shirodi ST, Arak, IRAN</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="dbox w-100 text-center">
+            <div class="icon d-flex align-items-center justify-content-center">
+              <span class="fa fa-phone"></span>
+            </div>
+            <div class="text">
+              <p><span>Phone:</span> <a href="tel://1234567920">+ 98 8633 126 163 - 5</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="dbox w-100 text-center">
+            <div class="icon d-flex align-items-center justify-content-center">
+              <span class="fa fa-paper-plane"></span>
+            </div>
+            <div class="text">
+              <p><span>Email:</span> <a href="mailto:info@yoursite.com">sanginspar@company.com</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="dbox w-100 text-center">
+            <div class="icon d-flex align-items-center justify-content-center">
+              <span class="fa fa-globe"></span>
+            </div>
+            <div class="text">
+              <p><span>Website</span> <a href="{% url 'blog:index' %}">sanginspar.com</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6 text-center mb-5">
+
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <div class="wrapper">
+              <div class="row no-gutters mb-5">
+                <div class="col-md-7">
+                  <div class="contact-wrap w-100 p-md-5 p-4">
+                    <h3 class="mb-4">Contact Us</h3>
+
+                    <form method="POST" id="contactForm" name="contactForm" class="contactForm">
+
+                      {% block contact %}
+                
+                      {% if messages %}
+                      <ul class="messages">
+                          {% for message in messages %}
+                          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                          {% endfor %}
+                      </ul>
+                      {% endif %}
+                  
+                      <div class="content">
+                      <div class="section-inner clearfix">
+                  
+                          <h3>Submit Your Message</h3>       
+                  
+                          <form action="" method="post">
+                              {% csrf_token %}
+                              <table>
+                              {{ form.as_table }}                   
+                                  <tr>
+                                      <td></td>
+                                      <td><input type="submit" value="Submit"></td>
+                                  </tr>
+                              </table>
+                          </form>
+  
+                      </div>
+                          </div>
+                      </div>
+  
+  
+                      {% endblock contact %}
+
+
+                            <a href="{% url 'blog:index' %}" class="btn btn-primary">Go Back</a>
+
+                      
+                    </form>
+                  </div>
+                </div>
+                <div class="col-md-5 d-flex align-items-stretch">
+                  <div id="map">
+                  </div>
+                </div>
+              </div>
+
+
+
+    <script src="{% static 'contact/js/jquery.min.js' %}"></script>
+    <script src="{% static 'contact/js/popper.js' %}"></script>
+    <script src="{% static 'contact/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'contact/js/jquery.validate.min.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="{% static 'contact/js/google-map.js' %}"></script>
+    <script src="{% static 'contact/js/main.js' %}"></script>
+  
+    </body>
+  </html>
+  
+  {% endblock content %}

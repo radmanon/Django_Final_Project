@@ -1,0 +1,110 @@
+
+{% load i18n %}
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Welcome {{request.user.username}}</a>
+
+
+
+
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav {% if 'fa' in request.path %}ml-auto {% else %}mr-auto{% endif %}">
+      <li class="nav-item
+      {% if request.path == "/home/" %}active{% endif %}">
+        <a class="nav-link" href="/home/"Home<span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item
+      {% if request.path == "/blog/" %}active{% endif %}">
+        <a class="nav-link" href="{% url 'blog:blog' %}" target="_blank">Blog</a>
+      </li>
+</ul>
+
+
+    <ul class="navbar-nav {% if 'fa' in request.path %}mr-auto {% else %}ml-auto{% endif %}">
+
+    {% if request.user.is_authenticated %}
+    {% if request.user.is_superuser or request.user.is_staff %}
+
+            <li class="nav-item">
+            <a class="nav-link" target="_blank" 
+            href="{% url 'admin:index' %}">Manage</a>
+        </li>
+    {% endif %}
+    
+        <li class="nav-item{% if request.path == '/accounts/profile' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'accounts:profile' %}">Edit Profile <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+              <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+            </svg></a>
+        </li>
+
+
+
+
+        <li class="nav-item{% if request.path == '/accounts/profile_view_just' %}active{% endif %}">
+          <a class="nav-link" href="{% url 'accounts:profile_view_just' %}">Profile view <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+          </svg></a>
+      </li>
+<!--
+        bilingual part
+        <li>
+          <div class="container">            
+            <div class="dropdown">
+             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Language Option
+             <span class="caret"></span></button>
+             <ul class="dropdown-menu">
+               <li><a href="en{{ request.path }}">English</a></li>
+               <li><a href="fa{{ request.path }}">Persian</a></li>
+             </ul>
+           </div>
+         </div>
+
+        </li>
+end of bilingual part. 
+
+-->
+
+
+
+    <li class="nav-item {% if request.path == "/accounts/login" %}active{% endif %}">
+            <a class="nav-link text-danger" href="{% url 'accounts:logout' %}">Logout <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-closed-fill" viewBox="0 0 16 16">
+              <path d="M12 1a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2a1 1 0 0 1 1-1h8zm-2 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+            </svg></a>
+        </li>
+
+    {% else %}
+
+
+<div style="padding-right: 5px;">
+      <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:login' %}"> Login <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+              <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+            </svg></a>
+        </li></div>
+
+
+        <div style="padding-right: 5px;">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:signup' %}">Signup <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+              <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+              <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+            </svg></a>
+        </li></div>
+
+
+    {% endif %}
+    
+
+    </ul>
+
+  </div>
+</nav>

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+ {% load static %}
+
+{% load my_replace %} 
+
+{% block title%}Home{% endblock title %}
+
+ {% block breadcrumb %}
+
+<li class="breadcrumb-item active" aria-current="page">Home</li>
+
+{% endblock breadcrumb %} {% block css %}
+
+<link rel="stylesheet" href="{% static 'css/home.css' %}" />
+
+{% endblock css %} {% block content %}
+
+<br/>
+<br/>
+
+
+
+
+<div class="row">
+  <div class="col-12 col-md-6 mx-auto">
+    <form action="." method="GET">
+      <div class="form-group">
+        <label
+          for="searchInput"
+          class="d-flex justify-content-center font-weight-bold"
+          >Search for posts</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="searchInput"
+          name="search"
+          placeholder="type something.."
+          value="{{ request.GET.search }}"
+        />
+        <button type="submit" class="btn btn-success mt-2 d-flex ml-auto">
+          Search
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+ 
+<div class="row">
+  <div class="col-12 col-md-6 mx-auto">
+    {% include 'blog/search_results.html' %}
+  </div>
+</div>
+
+
+
+<br /><br /><br />
+
+{% endblock content %} {% block js %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{% static 'js/search_ajax.js' %}"></script>
+{% endblock js %}
